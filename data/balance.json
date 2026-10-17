@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "time": { "start": 900, "max": 3600, "gate_threshold": 300, "drain_per_sec": 1 },
+  "player": { "speed": 240, "radius": 13, "dash_speed": 820, "dash_time": 0.15, "dash_cd": 1.1, "hit_iframe": 0.7,
+              "shot_interval": 0.17, "shot_speed": 760, "shot_damage": 10, "pickup_radius": 95 },
+  "skills": [
+    { "id": "time_burst", "name": "時間爆発", "cost": 12, "cd": 2.0, "damage": 42, "radius": 150, "desc": "自分の周囲に円形ダメージ" },
+    { "id": "temporal_dash", "name": "時間切断", "cost": 20, "cd": 3.5, "damage": 60, "length": 260, "slow": 0.45, "slow_time": 2.5, "desc": "前方へ貫通斬撃＋敵を遅くする" },
+    { "id": "drain_mark", "name": "寿命刻印", "cost": 8, "cd": 1.0, "bonus": 0.5, "desc": "狙った敵の撃破ドロップ +50%" }
+  ],
+  "enemies": {
+    "debtor":    { "name": "債務者", "hp": 60, "speed": 118, "radius": 12, "damage": 8, "drop": 10, "ai": "chase", "color": "#b9b2a2" },
+    "officer":   { "name": "時間監視官", "hp": 50, "speed": 86, "radius": 12, "damage": 8, "drop": 12, "ai": "ranged", "range": 330, "interval": 1.8, "color": "#6aa7ff" },
+    "enforcer":  { "name": "取立屋", "hp": 360, "speed": 124, "radius": 19, "damage": 14, "drop": 50, "ai": "chase", "elite": true, "color": "#d68a3c" },
+    "collector": { "name": "回収人", "hp": 400, "speed": 150, "radius": 17, "damage": 15, "drop": 0, "ai": "collector", "hp_per_debt": 0.35, "color": "#e5484d" },
+    "regulator": { "name": "時間管理局長", "hp": 3200, "speed": 88, "radius": 30, "damage": 16, "drop": 0, "ai": "boss", "color": "#f2b544",
+                   "aoe": { "damage": 14, "radius": 175, "interval": 4.2, "windup": 0.8 }, "summon_interval": 7, "volley_interval": 3.2 }
+  },
+  "area_hp_scale": 0.4,
+  "contracts": [
+    { "id": "short", "name": "短期融資", "principal": 150, "repay": 170, "due": 2 },
+    { "id": "standard", "name": "標準契約", "principal": 300, "repay": 360, "due": 3 },
+    { "id": "large", "name": "長期大口", "principal": 500, "repay": 650, "due": 4 }
+  ],
+  "max_contracts": 2,
+  "seize_rate": 0.4,
+  "shop": [
+    { "id": "atk", "name": "攻撃力 +15%", "price": 120, "desc": "通常弾とスキルのダメージ" },
+    { "id": "gain", "name": "時間回収効率 +20%", "price": 180, "desc": "時間片の獲得量" },
+    { "id": "maxtime", "name": "最大寿命 +300秒", "price": 150, "desc": "上限が5分のびる" },
+    { "id": "skillcost", "name": "スキル寿命コスト −10%", "price": 160, "desc": "3つのスキルすべて" }
+  ],
+  "premium_discount": 0.7,
+  "rest_gain": 90,
+  "rewards": [
+    { "id": "atk", "name": "通常攻撃 +15%", "desc": "通常弾のダメージ" },
+    { "id": "pickup", "name": "回収範囲 +20%", "desc": "時間片を吸い寄せる距離" },
+    { "id": "skillcost", "name": "スキル寿命コスト −10%", "desc": "払う秒数が減る" },
+    { "id": "collector", "name": "回収人へ追加ダメージ +30%", "desc": "滞納時の逃げ道を太くする" },
+    { "id": "firerate", "name": "連射速度 +15%", "desc": "通常弾の間隔" },
+    { "id": "speed", "name": "移動速度 +10%", "desc": "逃げ足" },
+    { "id": "gain", "name": "時間回収 +10%", "desc": "時間片の獲得量" }
+  ],
+  "nodes": {
+    "battle":   { "name": "通常戦", "icon": "戦", "desc": "敵を倒して寿命を奪う。報酬あり", "combat": true, "reward": true },
+    "elite":    { "name": "強敵", "icon": "強", "desc": "取立屋が出る。ドロップ大", "combat": true, "risk": true, "reward": true },
+    "shop":     { "name": "闇時計店", "icon": "店", "desc": "寿命で強化を買う。時計停止", "safe": true },
+    "contract": { "name": "寿命銀行", "icon": "契", "desc": "未来の寿命を借りる", "risk": true },
+    "rest":     { "name": "配給所", "icon": "休", "desc": "+90秒 か 早期返済", "safe": true },
+    "premium":  { "name": "高級区画", "icon": "◆", "desc": "残寿命300秒以上で通行可。割引店＋休息", "safe": true },
+    "alley":    { "name": "裏道", "icon": "▼", "desc": "危険な近道。強敵だがドロップ +50%", "combat": true, "risk": true, "reward": true, "drop_mul": 1.5 },
+    "boss":     { "name": "時間管理局", "icon": "局", "desc": "最終決戦。入口で全契約が満期になる", "combat": true, "risk": true }
+  },
+  "node_weights": { "battle": 46, "elite": 14, "shop": 14, "contract": 14, "rest": 12 },
+  "rooms_total": 9,
+  "gate_room": 4,
+  "room_size": [1280, 720],
+  "geometries": [
+    [], [[640,360,70]], [[420,240,50],[860,480,50]], [[420,480,50],[860,240,50]],
+    [[640,200,46],[640,520,46]], [[480,360,40],[800,360,40],[640,180,32],[640,540,32]],
+    [[360,200,36],[920,200,36],[360,520,36],[920,520,36]], [[640,360,110]],
+    [[540,300,44],[740,420,44],[960,250,30]], [[320,360,40],[640,240,40],[960,360,40]]
+  ]
+}
