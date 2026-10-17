@@ -3,6 +3,7 @@
 このファイルは Claude Code が最初に読む。作業前に必ず目を通すこと。
 
 ## プロジェクト
+- **呼び名**: オーナーとの会話ではカタカナの略称を使う。デモスワ = Demon Swarm、ライデ = Life Debt、デスレガ = Death Legacy（このリポジトリは「ライデ」）。
 - 寿命が「HP・通貨・スキル燃料・借金の担保」を兼ねる見下ろし型ローグライト。
 - 仕様書: `docs/specs/02_Lifetime_Roguelike_GDD.md`（MVP要件・エッジケース）、`docs/specs/03_Claude_Code_Architecture_Prompt.md`
 - 配信方針: GitHub Pages（Web版・スマホでも確認）→ 固まったら同じコードを Electron で包んで Windows 版を作り Steam へ。
