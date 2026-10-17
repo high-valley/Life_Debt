@@ -11,7 +11,7 @@
 
 ## 現在地（2026-10 時点）
 - M0 縦切りスライス完了（`docs/milestones.md` に受け入れ条件との対応表）。
-- 公開URL: https://high-valley.github.io/life_debt/
+- 公開URL: https://high-valley.github.io/Life_Debt/
 - 経緯: 単一HTMLの試作（オーナー評価「いい感じ」）→ Godot 版 → **iPhone のブラウザで重く遊べなかったため TypeScript（Canvas 2D）へ移行**（ADR-012）。Godot 版は `godot-legacy` ブランチ。
 - 次は M1（手触り調整）。仕様書 §19「初回プレイテストの問い」への答えを集め、数値は `data/balance.json` だけで調整する。
 

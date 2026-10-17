@@ -3,7 +3,7 @@
 時債都市では、残りの寿命が通貨になる。撃てば減り、奪えば増え、足りなければ未来の自分から借りる。返せなければ、回収人が来る。
 **寿命が HP・通貨・スキル燃料・借金の担保を兼ねる**見下ろし型ローグライトの最小縦切りスライス（TypeScript / Canvas 2D）。
 
-- 遊ぶ（Web版・スマホ可）: https://high-valley.github.io/life_debt/
+- 遊ぶ（Web版・スマホ可）: https://high-valley.github.io/Life_Debt/
 - 仕様: `docs/specs/02_Lifetime_Roguelike_GDD.md`
 - 配信方針: GitHub Pages で確認 → 固まったら同じコードを Electron で包んで Windows 版を作り Steam へ（ADR-012）
 - 旧 Godot 版は `godot-legacy` ブランチに保存（iPhone のブラウザで重かったため移行）
