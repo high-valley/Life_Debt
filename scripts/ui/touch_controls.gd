@@ -5,6 +5,7 @@ extends Control
 ##   右下 = ダッシュと3つの寿命スキル / 右上 = 契約書・ポーズ
 
 const JOY_RADIUS := 56.0
+const DEAD_ZONE := 6.0
 
 var router: InputRouter
 var room_ref: Callable    # 現在の RoomSim を返す
@@ -76,8 +77,8 @@ func _input(event: InputEvent) -> void:
 	elif event is InputEventScreenDrag:
 		if not joy.is_empty() and joy.index == event.index:
 			joy.pos = event.position
-			var v: Vector2 = joy.pos - joy.origin
-			router.touch_move = (v / JOY_RADIUS).limit_length(1.0) if v.length() > 8.0 else Vector2.ZERO
+			joy.origin = follow_origin(joy.origin, joy.pos)
+			router.touch_move = stick_vector(joy.origin, joy.pos)
 		get_viewport().set_input_as_handled()
 
 
@@ -128,3 +129,20 @@ func _circle(btn: Dictionary, label: String, sub: String, lit: bool, cd: float, 
 	draw_string(font, Vector2(p.x - r, y), label, HORIZONTAL_ALIGNMENT_CENTER, r * 2.0, fs, Color("#6b675d") if dim else Color("#efe7d6"))
 	if sub != "":
 		draw_string(font, Vector2(p.x - r, p.y + r * 0.42), sub, HORIZONTAL_ALIGNMENT_CENTER, r * 2.0, fs, Color("#e5484d") if dim else Color("#f2b544"))
+
+
+## 指が円の外へ出たら、中心を指の方へ引っぱる（追従スティック）。
+## 中心が固定だと、大きくスワイプした後に向きを変えるには指をその分戻す必要があり、操作が遅れて感じる。
+static func follow_origin(origin: Vector2, pos: Vector2) -> Vector2:
+	var v := pos - origin
+	if v.length() > JOY_RADIUS:
+		return pos - v.normalized() * JOY_RADIUS
+	return origin
+
+
+## 移動入力（長さ0〜1）。中心から少し動かしただけで反応する
+static func stick_vector(origin: Vector2, pos: Vector2) -> Vector2:
+	var v := pos - origin
+	if v.length() <= DEAD_ZONE:
+		return Vector2.ZERO
+	return (v / JOY_RADIUS).limit_length(1.0)
