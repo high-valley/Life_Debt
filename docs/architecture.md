@@ -1,4 +1,6 @@
-# アーキテクチャ（縦切りスライス v0.1）
+# アーキテクチャ（縦切りスライス / TypeScript 版）
+
+> 2026-10 に Godot から TypeScript へ移行（ADR-012）。名前はファイルに読み替える: `src/sim/timeLedger.ts` / `debtBook.ts` / `runState.ts` / `roomSim.ts`、表示は `src/view/`、画面は `src/ui/menus.ts`（HTML）、状態機械とループは `src/main.ts`。
 
 ```mermaid
 flowchart LR

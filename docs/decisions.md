@@ -50,3 +50,11 @@
 - **決定**: タッチ操作では見えている一番近い敵へ自動で撃つ。寿命スキルだけをボタンで使う。
 - **理由**: 親指2本で「移動・照準・射撃・スキル」を同時にこなすのは無理がある。寿命を払う判断（スキル）に集中させる。
 
+
+## ADR-012 Godot から TypeScript（ブラウザ向け技術）へ移行
+- **背景**: Godot 4.7 の Web版は iPhone Air のブラウザで「もっさり」して遊べなかった。同じ仕様の単一HTML試作（Canvas 2D）は滑らか。
+  姉妹作 Death Legacy で先に移行して実機で滑らかに動くことを確認したので、3作とも同じ方式に揃えた。
+- **決定**: TypeScript＋Canvas 2D、メニューは HTML（契約書は紙の見た目）。外部ライブラリなし。書き出しは esbuild、テストは Node 標準のテスト機能。
+  ロジック（TimeLedger・DebtBook・RunState・RoomSim）とテストは Godot 版から移植し、ADR-004〜006・009〜011 の考え方はそのまま。
+  ADR-001〜003・007 は廃止（フォント同梱も不要、端末の書体を使う）。Godot 版は `godot-legacy` ブランチに残す。
+- **Steam 版（ADR-008 の更新）**: 遊びが固まったら同じ `dist/` を Electron で包んで Windows 版を作り、Steamworks は `src/platform.ts` の `steamAvailable()` から使う。
